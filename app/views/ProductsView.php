@@ -4,7 +4,8 @@ use app\controllers\Rating;
 
 class ProductsView
 {
-    public function render($products) {
+    public function render($products) 
+    {
         if(isset($products) && count($products)> 0)
         {
             echo '

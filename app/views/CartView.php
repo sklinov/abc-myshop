@@ -73,6 +73,7 @@ class CartView
 
         </div>';
     }
+    
     private function moneyFormat($number) 
     {
         return '$'.number_format($number, 2, ',', ' ');

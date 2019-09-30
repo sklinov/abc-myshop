@@ -7,10 +7,12 @@ class RatingModel extends Model
 {   
     private $current_rating;
 
-    public function getProductRating($product_id) {
+    public function getProductRating($product_id) 
+    {
         $query = "SELECT AVG(rating) AS AverageRating FROM rating WHERE product_id =".$product_id."";
         $result =  $this->doQuery($query);
-        while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        while($row = $result->fetch(PDO::FETCH_ASSOC)) 
+        {
             extract($row);
             $this->current_rating = $row['AverageRating'] !== NULL ? number_format($row['AverageRating'], 2, ',', ' ') : 'N/A';
         }

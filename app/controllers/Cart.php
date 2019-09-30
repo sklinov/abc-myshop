@@ -36,16 +36,6 @@ class Cart
         return $this->in_cart;
     }
 
-    public function addToCart($product_id)
-    {
-        $this->changeQuantityInCart($product_id, 1);
-    }
-
-    public function removeFromCart($product_id)
-    {
-        $this->changeQuantityInCart($product_id, -1);
-    }
-
     public function changeQuantityInCart($product_id, $change_by) 
     {
         foreach($this->products_list as $product)
@@ -125,7 +115,8 @@ class Cart
         }
     }
 
-    public function showCart() {
+    public function showCart() 
+    {
         $cart_view = new \app\views\CartView();
         $cart_view->renderCart($this);
     }

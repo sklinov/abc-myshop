@@ -14,8 +14,10 @@ class Model
         $this->conn = $database->connect();;
     }
 
-    protected function doQuery($query) {
-        try {
+    protected function doQuery($query) 
+    {
+        try 
+        {
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
         }

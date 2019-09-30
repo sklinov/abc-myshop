@@ -11,10 +11,7 @@
         
         public function connect() 
         { 
-            $host = "localhost";
-            $db_name = "sklinov";
-            $username = "myshopsklinovpro";
-            $password = "ved4o1zLhX59T8rj";
+            require 'config.php';
 
             $this->host = $host;
             $this->db_name = $db_name;
@@ -24,11 +21,10 @@
 
             try 
             {
-                
                 $this->conn = new PDO('mysql:host='.$this->host.';
-                                       dbname='.$this->db_name,
-                                       $this->username, 
-                                       $this->password);
+                                        dbname='.$this->db_name,
+                                        $this->username, 
+                                        $this->password);
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } 
             catch(PDOException $e) 

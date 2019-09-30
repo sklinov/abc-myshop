@@ -11,7 +11,7 @@ class Wallet
         $this->balance = isset($_SESSION['balance']) ? $_SESSION['balance'] : 100;
     }
 
-    public function __desctuct()
+    public function __destruct()
     {
         $_SESSION['balance'] = $this->balance;
     }

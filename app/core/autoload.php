@@ -8,7 +8,8 @@ spl_autoload_register(function($className)
     {
         require_once $file;
     }
-    else {
+    else 
+    {
         echo 'File:'.$file.' not found';
     }
 });
