@@ -3,7 +3,7 @@ namespace app\controllers;
 
 session_start();
 
-define('PROJECT_SUBFOLDER','/abc//');
+define('PROJECT_SUBFOLDER','/abc');
 
 require 'autoload.php';
 
@@ -11,9 +11,10 @@ require 'autoload.php';
 $wallet = new Wallet();
 $header = new Header();
 $products = new Products();
-$products_list = $products->getProducts();
-//var_dump($products_list);
-$cart = new Cart($products_list);
+$shipping = new Shipping();
+$products_list = $products->get();
+$shipping_list = $shipping->get();
+$cart = new Cart($products_list, $shipping_list);
 
 //Do logic
 
@@ -33,11 +34,16 @@ if(isset($_GET['checkout']))
 {
     $cart->checkout($wallet);
 }
+if(isset($_GET['changeshipping']))
+{
+    $shipping_id = $_GET['changeshipping'];
+    $cart->changeShipping($shipping_id);
+}
 
 //
 //Show everything
 $header->showHeader($wallet);
-$products->showProducts();
+$products->show();
 $cart->showCart();
 
 ?>

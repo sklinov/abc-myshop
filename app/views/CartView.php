@@ -11,6 +11,7 @@ class CartView
         ';
         if(isset($cart->in_cart) && count($cart->in_cart)> 0)
         {
+            //Product grid
             foreach($cart->in_cart as $product) 
             {
                 $svg = $product['product']['image'];
@@ -37,8 +38,27 @@ class CartView
                 </div>
                 ';
             }
+            //Shipping method
+            echo '
+                <div class="form-group">
+                <label class="nav-item" style="color:#ffffff;">Choose shipping:</label><br>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">';
+                foreach($cart->shipping_list as $shipping)
+                {
+                    echo ' 
+                        <label class="btn btn-info">
+                        <input type="radio" name="shipping" data-shipping-id="'.$shipping['shipping_id'].'" autocomplete="off">'.$shipping['shipping_name'].' - '.$this->moneyFormat($shipping['shipping_price']).'
+                        </label>
+                    ';
+                }
+            echo '
+                </div>    
+                </div>
+            ';
+
+            //Checkout controls
             $button_class = isset($cart->message) ? 'btn-danger': 'btn-primary';
-            $button_label = isset($cart->message) ? $message  : 'Checkout';
+            $button_label = isset($cart->message) ? $cart->message  : 'Checkout';
             echo '
             <div><h3 class="navbar-brand">Subtotal:'. $this->moneyFormat($cart->getTotal()).'</h3></div>
             <button id="checkout" class="btn '. $button_class. '">'.$button_label.'</button>
@@ -50,7 +70,7 @@ class CartView
             echo '<h3 class="navbar-brand">No products in your cart...</h3>';
         }
         echo '
-        </>';
+        </div>';
     }
     private function moneyFormat($number) 
     {

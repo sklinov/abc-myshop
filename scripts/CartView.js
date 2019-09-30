@@ -33,5 +33,24 @@ $(function() {
                 alert('Load error');
             }
         });
+    });
+    $('#app').off("change","input[type=radio][name='shipping']").on("change","input[type=radio][name='shipping']", function (e) {
+        e.preventDefault();
+        shippingId = $(e.target).data("shipping-id")
+        console.log(shippingId)
+        //numberToRemove = $(e.target).prev('input').val()
+        $.ajax({
+            type: 'get',
+            url: './app/core/App.php',
+            data: {
+                'changeshipping': shippingId,
+            },
+            success: results => {
+                $('#app').html(results);
+            },
+            error: () => {
+                alert('Load error');
+            }
+        });
     });        
 })

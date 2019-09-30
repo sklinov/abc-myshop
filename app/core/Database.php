@@ -10,9 +10,22 @@
         private $conn;
         
         public function connect() 
-        {
-            
-            require_once 'config.php';
+        { 
+            // $config_file = $_SERVER['DOCUMENT_ROOT'].PROJECT_SUBFOLDER.'/app/core/config.php';
+            // if(file_exists($config_file))
+            // {
+            //     require_once $config_file;
+            // }
+            // else
+            // {
+            //     echo '<br>Configuration file not found';
+            //     exit();
+            // }
+            $host = "localhost";
+            $db_name = "myshop";
+            $username = "myshop";
+            $password = "ved4o1zLhX59T8rj";
+
             $this->host = $host;
             $this->db_name = $db_name;
             $this->username = $username;

@@ -14,7 +14,7 @@ class ProductsModel extends Model
         return $this->product_list;
     }
 
-    public function getProductsFromDB() {
+    public function getDataFromDB() {
         $query = "SELECT * from products";
         $result =  $this->doQuery($query);
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {

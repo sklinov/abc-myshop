@@ -6,23 +6,29 @@ use \app\controllers\Wallet;
 class Cart
 {
     private $products_list;
+    public $shipping_list;
+    public $shipping;
     public $in_cart;
     public $message;
 
-    public function __construct($products_list) 
+    public function __construct($products_list, $shipping_list) 
     {
         $this->products_list = $products_list;
+        $this->shipping_list = $shipping_list;
         $this->in_cart = isset($_SESSION['in_cart']) ? $_SESSION['in_cart'] : [];
+        $this->shipping = isset($_SESSION['shipping']) ? $_SESSION['shipping'] : null;
     }
 
     public function __destruct()
     {
         $_SESSION['in_cart'] = $this->in_cart;
+        $_SESSION['shipping'] = $this->shipping;
     }
 
     private function saveCart()
     {
         $_SESSION['in_cart'] = $this->in_cart;
+        $_SESSION['shipping'] = $this->shipping;
     }
 
     public function getCart() 
@@ -62,9 +68,22 @@ class Cart
         $this->saveCart();
     }
 
+    public function changeShipping($shipping_id)
+    {
+       foreach($this->shipping_list as $shipping)
+       {
+           if($shipping['shipping_id'] === $shipping_id)
+           {
+               $this->shipping = $shipping;
+               break;
+           }
+       } 
+    }
+
     private function clearCart()
     {
         $this->in_cart = [];
+        $this->shipping = null;
     }
 
     public function getTotal()
@@ -74,18 +93,35 @@ class Cart
         {
             $total += $product['product']['price'] * $product['quantity'];
         }
+        $total += isset($this->shipping) ? $this->shipping['shipping_price'] : 0;
         return $total;
     }
 
     public function checkout(Wallet $wallet) 
     {
-        if($wallet->pay($this->getTotal()))
+        if($this->checkShipping())
         {
-            $this->clearCart();
+            if($wallet->pay($this->getTotal()))
+            {
+                $this->clearCart();
+            }
+            else 
+            {
+                $this->message = 'Not enought money to pay';
+            }
+        }   
+    }
+
+    private function checkShipping()
+    {
+        if(isset($this->shipping))
+        {
+            return true;
         }
         else 
         {
-            $this->message = 'Not enought money to pay';
+            $this->message = 'Choose shipping';
+            return false;
         }
     }
 

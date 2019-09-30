@@ -3,7 +3,7 @@ namespace app\views;
 
 class ProductsView
 {
-    public function renderProducts($products) {
+    public function render($products) {
         if(isset($products) && count($products)> 0)
         {
             echo '
