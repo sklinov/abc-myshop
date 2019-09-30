@@ -22,7 +22,10 @@ class ProductsView
                     <div class="card-body">
                         <h5 class="card-title">'. $product['name'].'</h5>
                         <p class="card-text">&#36;'. number_format($product['price'], 2, ',', ' ').'</p>
-                        <a href="#" id="addtocart" class="btn btn-primary" data-product-id="'.$product['product_id'].'">Add to cart</a>
+                        <form class="form-inline">
+                            <input class="form-control mr-2" id="number-to-add" value="1" size="1"></input>
+                            <button id="addtocart" class="btn btn-primary" data-product-id="'.$product['product_id'].'">Add to cart</button>
+                        </form>
                     </div>
                 </div>
                 ';

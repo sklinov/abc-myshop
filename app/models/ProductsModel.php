@@ -3,25 +3,9 @@
 namespace app\models;
 use PDO;
 
-class ProductsModel
+class ProductsModel extends Model
 {
-    protected $conn;
-    public $product_list = [];
-    
-    public function __construct($db) 
-    {
-        $this->conn = $db;
-    }
-    private function doQuery($query) {
-        try {
-            $stmt = $this->conn->prepare($query);
-            $stmt->execute();
-        }
-        catch(PDOException $e) {
-            echo 'Error:'. $e->getMessage();
-        } 
-        return $stmt;
-    }
+    private $product_list = [];
 
     protected function addToProductList($item) {
         array_push($this->product_list, $item);
@@ -30,7 +14,7 @@ class ProductsModel
         return $this->product_list;
     }
 
-    public function getProducts() {
+    public function getProductsFromDB() {
         $query = "SELECT * from products";
         $result =  $this->doQuery($query);
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
