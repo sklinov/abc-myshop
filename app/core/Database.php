@@ -11,19 +11,9 @@
         
         public function connect() 
         { 
-            // $config_file = $_SERVER['DOCUMENT_ROOT'].PROJECT_SUBFOLDER.'/app/core/config.php';
-            // if(file_exists($config_file))
-            // {
-            //     require_once $config_file;
-            // }
-            // else
-            // {
-            //     echo '<br>Configuration file not found';
-            //     exit();
-            // }
             $host = "localhost";
-            $db_name = "myshop";
-            $username = "myshop";
+            $db_name = "sklinov";
+            $username = "myshopsklinovpro";
             $password = "ved4o1zLhX59T8rj";
 
             $this->host = $host;
