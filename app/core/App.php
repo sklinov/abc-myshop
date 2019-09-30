@@ -39,9 +39,16 @@ if(isset($_GET['changeshipping']))
     $shipping_id = $_GET['changeshipping'];
     $cart->changeShipping($shipping_id);
 }
+if(isset($_GET['rate']))
+{
+    $product_id = $_GET['rate'];
+    $product_rating = $_GET['rating'];
+    $rating = new Rating();
+    $rating->setProductRating($product_id, $product_rating);
+}
 
-//
-//Show everything
+
+//Show
 $header->showHeader($wallet);
 $products->show();
 $cart->showCart();

@@ -1,5 +1,6 @@
 <?php
 namespace app\views;
+use app\controllers\Rating;
 
 class ProductsView
 {
@@ -13,6 +14,8 @@ class ProductsView
             ';
             foreach($products as $product) 
             {
+                $rating = new Rating();
+                $rating_form = $rating->showProductRating($product['product_id']);
                 $svg = $product['image'];
                 echo '
                 <div class="card m-3">
@@ -21,7 +24,9 @@ class ProductsView
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">'. $product['name'].'</h5>
-                        <p class="card-text">&#36;'. number_format($product['price'], 2, ',', ' ').'</p>
+                        <p class="card-text">&#36;'. number_format($product['price'], 2, ',', ' ').'</p>';
+                        echo $rating_form;
+                        echo '
                         <form class="form-inline">
                             <input class="form-control mr-2" id="number-to-add" value="1" size="1"></input>
                             <button id="addtocart" class="btn btn-primary" data-product-id="'.$product['product_id'].'">Add to cart</button>

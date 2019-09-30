@@ -6,10 +6,12 @@ use PDO;
 class Model
 {
     protected $conn;
+    private $list;
 
-    public function __construct($db) 
+    public function __construct() 
     {
-        $this->conn = $db;
+        $database = new \app\core\Database();
+        $this->conn = $database->connect();;
     }
 
     protected function doQuery($query) {
@@ -22,4 +24,6 @@ class Model
         } 
         return $stmt;
     }
+
+
 }

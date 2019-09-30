@@ -17,5 +17,26 @@ $(function() {
                 alert('Load error');
             }
         });
-    });    
+    });
+    
+    $('#app').off("click","#rating").on("click","#rating", function (e) {
+        e.preventDefault();
+        productId = $(e.target).data("product-id")
+        rating = parseInt($(e.target).html());
+        console.log(productId, rating);
+        $.ajax({
+            type: 'get',
+            url: './app/core/App.php',
+            data: {
+                'rate': productId,
+                'rating': rating
+            },
+            success: results => {
+                $('#app').html(results);
+            },
+            error: () => {
+                alert('Load error');
+            }
+        });
+    });   
 })

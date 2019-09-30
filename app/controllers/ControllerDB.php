@@ -5,13 +5,12 @@ use ReflectionClass;
 
 class ControllerDB
 {
-    private $data;
-    private $db;
+    protected $data;
+    protected $db;
 
     public function __construct() 
     {
-        $database = new \app\core\Database();
-        $this->db = $database->connect();
+
     }
 
     protected function className()
@@ -22,7 +21,7 @@ class ControllerDB
 
     public function get() {
         $model_class_name = '\\app\models\\'.$this->className().'Model';
-        $model = new $model_class_name($this->db);
+        $model = new $model_class_name();
         $this->data = $model->getDataFromDB();
         return $this->data;
     }

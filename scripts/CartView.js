@@ -15,6 +15,7 @@ $(function() {
             }
         });
     });
+
     $('#app').off("click","#removefromcart").on("click","#removefromcart", function (e) {
         e.preventDefault();
         productId = $(e.target).data("product-id")
@@ -34,11 +35,10 @@ $(function() {
             }
         });
     });
+
     $('#app').off("change","input[type=radio][name='shipping']").on("change","input[type=radio][name='shipping']", function (e) {
         e.preventDefault();
         shippingId = $(e.target).data("shipping-id")
-        console.log(shippingId)
-        //numberToRemove = $(e.target).prev('input').val()
         $.ajax({
             type: 'get',
             url: './app/core/App.php',

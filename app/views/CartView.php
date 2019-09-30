@@ -7,7 +7,7 @@ class CartView
     public function renderCart(Cart $cart)
     {
         echo '
-        <div class="navbar fixed-bottom navbar-dark bg-dark">
+        <div class="navbar sticky-bottom navbar-dark bg-dark">
         ';
         if(isset($cart->in_cart) && count($cart->in_cart)> 0)
         {
@@ -16,7 +16,7 @@ class CartView
             {
                 $svg = $product['product']['image'];
                 echo '
-                <div class="card mb-3 pull-left" style="width: 250px;">
+                <div class="card m-2" style="width: 250px;">
                     <div class="row no-gutters">
                         <div class="col-md-4 ml-2 mt-auto mb-auto" style="max-width: 50px; max-height: 50px;">
                             '.$svg.'
@@ -40,7 +40,7 @@ class CartView
             }
             //Shipping method
             echo '
-                <div class="form-group">
+                <div class="form-group ml-auto">
                 <label class="nav-item" style="color:#ffffff;">Choose shipping:</label><br>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">';
                 foreach($cart->shipping_list as $shipping)
@@ -60,8 +60,8 @@ class CartView
             $button_class = isset($cart->message) ? 'btn-danger': 'btn-primary';
             $button_label = isset($cart->message) ? $cart->message  : 'Checkout';
             echo '
-            <div><h3 class="navbar-brand">Subtotal:'. $this->moneyFormat($cart->getTotal()).'</h3></div>
-            <button id="checkout" class="btn '. $button_class. '">'.$button_label.'</button>
+            <h3 class="navbar-brand mr-3 ml-3">Total:<br>'. $this->moneyFormat($cart->getTotal()).'</h3>
+            <button id="checkout" class="btn btn-lg '. $button_class. '">'.$button_label.'</button>
             <script src="scripts/CartView.js"></script>
             ';
         }
@@ -70,6 +70,7 @@ class CartView
             echo '<h3 class="navbar-brand">No products in your cart...</h3>';
         }
         echo '
+
         </div>';
     }
     private function moneyFormat($number) 
