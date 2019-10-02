@@ -1,5 +1,5 @@
 $(function() {
-    $('#app').on("click","#checkout", function (e) {
+    $('#app').off("click","#checkout").on("click","#checkout", function (e) {
         e.preventDefault();
         $.ajax({
             type: 'get',

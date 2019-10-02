@@ -1,18 +1,29 @@
 <?php 
 
+
+
 if(isset($_GET['addtocart']))
 {
-    $added_id = $_GET['addtocart'];
-    $number_to_add = isset($_GET['numberToAdd']) && $_GET['numberToAdd'] !== '' && is_numeric($_GET['numberToAdd']) ? $_GET['numberToAdd'] : 1;
+    $added_id = $_GET['addtocart']; 
+    $number_to_add = isset($_GET['numberToAdd']) 
+                     && $_GET['numberToAdd'] !== '' 
+                     && is_numeric($_GET['numberToAdd']) 
+                     && intval($_GET['numberToAdd']) > 0 
+                     ? intval($_GET['numberToAdd']) 
+                     : 1;
     $cart->changeQuantityInCart($added_id, $number_to_add);
 }
 
 if(isset($_GET['removefromcart']))
 {
     $removed_id = $_GET['removefromcart'];
-    $number_to_remove = isset($_GET['numberToRemove']) && $_GET['numberToRemove'] !== '' && is_numeric($_GET['numberToRemove']) ? $_GET['numberToRemove']*-1 : -1;
+    $number_to_remove = isset($_GET['numberToRemove']) 
+                        && $_GET['numberToRemove'] !== '' 
+                        && is_numeric($_GET['numberToRemove']) 
+                        && intval($_GET['numberToRemove']) > 0 
+                        ? intval($_GET['numberToRemove'])*-1 
+                        : -1;
     $cart->changeQuantityInCart($removed_id, $number_to_remove);
-
 }
 if(isset($_GET['checkout']))
 {
@@ -29,6 +40,6 @@ if(isset($_GET['rate']))
 {
     $product_id = $_GET['rate'];
     $product_rating = $_GET['rating'];
-    $rating = new Rating();
+    $rating = new \app\controllers\Rating();
     $rating->setProductRating($product_id, $product_rating);
 }
